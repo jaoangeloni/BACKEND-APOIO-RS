@@ -14,6 +14,7 @@ class GerenciamentoItem {
         itens.add(item);
     }
 
+    
     public List<Item> listarItens() {
         return new ArrayList<>(itens);
     }
