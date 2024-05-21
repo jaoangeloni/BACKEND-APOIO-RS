@@ -1,13 +1,19 @@
 package aplicativo;
 
-import DAO.CentroDAO;
+import dominio.CentroDeDistribuicao;
+import model.dao.DaoAbrigos;
+import model.dao.DaoFactory;
 
 public class Programa {
 	public static void main(String[] args) {
 		
-	CentroDAO centroDAO = new CentroDAO();
-	centroDAO.inserirCentros();
+		CentroDeDistribuicao centros = new CentroDeDistribuicao();
+		centros.inserirCentros();
+		Abrigos abrigo = new Abrigos();
+		abrigo.inserirTeste();
+		
+		DaoAbrigos daoAbrigo = DaoFactory.createDaoAbrigo();
+		
 		
 	}
 }
-	
