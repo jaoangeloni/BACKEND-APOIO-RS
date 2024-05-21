@@ -12,19 +12,28 @@ import dominio.Centro;
 public class CentroDAO {
 	private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("sos-rs");
 
-    public void inserirCentros() {
-        Centro c1 = new Centro(null, "Esperança", "Av. Boqueirão, 2450 - Igara, Canoas - RS, 92032-420");
-        Centro c2 = new Centro(null, "Prosperidade.", "Av. Borges de Medeiros 1501 Porto Alegre CEP: 90119900");
-        Centro c3 = new Centro(null, "Reconstrução.", "R. Dr. Décio Martins Costa, 312 - Vila Eunice Nova, Cachoeirinha - RS, 94920-170");
-
+    public void inserir(Centro centro) {
         EntityManager em = emf.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
 
         try {
             transaction.begin();
-            em.persist(c1);
-            em.persist(c2);
-            em.persist(c3);
+            em.persist(centro);
+            transaction.commit();
+        } catch (HibernateException e) {
+            e.printStackTrace();
+        } finally {
+            em.close();
+        }
+    }
+    
+    public void apagarTodos() {
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction transaction = em.getTransaction();
+
+        try {
+            transaction.begin();
+            em.createQuery("DELETE FROM Centro").executeUpdate();
             transaction.commit();
         } catch (HibernateException e) {
             e.printStackTrace();
@@ -33,3 +42,4 @@ public class CentroDAO {
         }
     }
 }
+

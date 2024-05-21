@@ -21,12 +21,8 @@ public class Pedido implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String id;
 	
-	@OneToMany
-	@JoinColumn(name = "centroId")
 	private Centro centro;
 	
-	@OneToMany
-	@JoinColumn(name = "abrigoId")
 	private Abrigo abrigo;
 	
 	@ManyToOne
