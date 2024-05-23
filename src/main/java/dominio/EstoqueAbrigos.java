@@ -12,23 +12,23 @@ public class EstoqueAbrigos implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToMany
+    @OneToOne
     @JoinColumn(name = "abrigo_id")
-    private Integer abrigosFK;
+    private Abrigo abrigo;
 
-    //@OneToMany
-    //@JoinColumn(name = "item_id")
-    private Integer itemFK;
+    @ManyToOne
+    @JoinColumn(name = "item_id")
+    private Item item;
 
     private Integer quantidade;
     private Integer limite = 1000;
 
     public EstoqueAbrigos() {}
 
-    public EstoqueAbrigos(Integer id, Integer abrigosFK, Integer itemFK, Integer quantidade, Integer limite) {
+    public EstoqueAbrigos(Integer id, Abrigo abrigo, Item item, Integer quantidade, Integer limite) {
         this.id = id;
-        this.abrigosFK = abrigosFK;
-        this.itemFK = itemFK;
+        this.abrigo = abrigo;
+        this.item = item;
         this.quantidade = quantidade;
         this.limite = limite;
     }

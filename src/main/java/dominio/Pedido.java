@@ -1,16 +1,9 @@
-/* package dominio;
+package dominio;
 
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "pedidos")
@@ -19,8 +12,15 @@ public class Pedido implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String id;
+	private Integer id;
+
+	@OneToOne
+	@JoinColumn(name = "centroId")
+	private Centro centro;
 	
+	@OneToOne
+	@JoinColumn(name = "abrigoId")
+	private Abrigo abrigo;
 	
 	@ManyToOne
 	@JoinColumn(name = "itemId")
@@ -36,7 +36,7 @@ public class Pedido implements Serializable{
 	
 	public Pedido() {}
 
-	public Pedido(String id, Item item, Integer quantidade, Date data, String status,String motivo) {
+	public Pedido(Integer id, Centro centro, Abrigo abrigo, Item item, Integer quantidade, Date data, String status,String motivo) {
 		this.id = id;
 		this.item = item;
 		this.quantidade = quantidade;
@@ -45,4 +45,3 @@ public class Pedido implements Serializable{
 		this.motivo = motivo;
 	}
 }
-*/
