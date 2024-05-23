@@ -12,23 +12,24 @@ public class EstoqueCentros implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToMany
+    @OneToOne
     @JoinColumn(name = "centro_id")
-    private Integer centroFK;
+    private Centro centro;
 
-    //@OneToMany
-    //@JoinColumn(name = "item_id")
-    private Integer itemFK;
+    @ManyToOne
+    @JoinColumn(name = "item_id")
+    private Item item;
 
     private Integer quantidade;
     private Integer limite = 1000;
 
     public EstoqueCentros() {}
 
-    public EstoqueCentros(Integer id, Integer centroFK, Integer itemFK, Integer quantidade, Integer limite) {
+    public EstoqueCentros(Integer id, Centro centro, Item item, Integer quantidade, Integer limite) {
         this.id = id;
-        this.centroFK = centroFK;
-        this.itemFK = itemFK;
+        this.centro = centro;
+        this.item = item;
         this.quantidade = quantidade;
     }
+
 }

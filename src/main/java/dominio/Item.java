@@ -10,7 +10,7 @@ import enums.Categoria;
 
 @Entity
 @Table(name = "item")
-class Item {
+public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
