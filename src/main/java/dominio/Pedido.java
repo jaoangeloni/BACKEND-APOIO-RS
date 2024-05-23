@@ -1,4 +1,4 @@
-package dominio;
+/*package dominio;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -54,3 +54,4 @@ public class Pedido implements Serializable{
 		this.motivo = motivo;
 	}
 }
+*/
