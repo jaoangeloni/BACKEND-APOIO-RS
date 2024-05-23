@@ -1,4 +1,4 @@
-/*package dominio;
+package dominio;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -33,4 +33,3 @@ public class EstoqueAbrigos implements Serializable {
         this.limite = limite;
     }
 }
-*/

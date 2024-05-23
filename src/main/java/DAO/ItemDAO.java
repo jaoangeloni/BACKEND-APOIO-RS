@@ -38,7 +38,7 @@ public class ItemDAO {
     }
 
     // Método para atualizar um item
-    /* public void updateItem(Long id, Item itemDetails) {
+    public void updateItem(Long id, Item itemDetails) {
         EntityManager em = emf.createEntityManager(); // Cria uma nova instância de EntityManager
         em.getTransaction().begin(); // Inicia uma transação
         Item item = em.find(Item.class, id); // Busca o item pelo ID
@@ -53,7 +53,7 @@ public class ItemDAO {
         }
         em.close(); // Fecha o EntityManager
     }
-	*/
+
     
     // Método para deletar um item
     public void deleteItem(Long id) {
