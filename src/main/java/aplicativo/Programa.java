@@ -1,13 +1,28 @@
 package aplicativo;
 
-import DAO.CentroDAO;
+import dominio.Abrigo;
+import dominio.CentroDeDistribuicao;
+
+import java.util.List;
+
+import DAO.AbrigoDAO;
 
 public class Programa {
 	public static void main(String[] args) {
 		
-	CentroDAO centroDAO = new CentroDAO();
-	centroDAO.inserirCentros();
+		CentroDeDistribuicao centros = new CentroDeDistribuicao();
+		centros.inserirCentros();
+		
+		
+		Abrigo abrigo1 = new Abrigo(null, "Abrigo1", "Rua das ruas", "abrigo@gmail.com", 300, "75%", "Seu Joao",
+				"13997979797");
+		
+		AbrigoDAO crud = new AbrigoDAO();
+		
+		crud.apagarTodos();
 		
 	}
 }
-	
+		
+
+       
