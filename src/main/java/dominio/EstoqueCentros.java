@@ -1,4 +1,4 @@
-package dominio;
+/*package dominio;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -32,3 +32,4 @@ public class EstoqueCentros implements Serializable {
         this.quantidade = quantidade;
     }
 }
+*/

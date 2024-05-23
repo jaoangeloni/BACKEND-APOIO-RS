@@ -1,4 +1,4 @@
-package aplicativo;
+/*package aplicativo;
 
 import java.util.List;
 
@@ -66,4 +66,4 @@ public class ItemDAO {
         }
         em.close(); // Fecha o EntityManager
     }
-}
+}*/

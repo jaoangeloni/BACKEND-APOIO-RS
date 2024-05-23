@@ -1,4 +1,4 @@
-package aplicativo;
+/*package aplicativo;
 
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
@@ -162,4 +162,4 @@ public class Abrigos {
 
 	
 	
-}
+}*/
