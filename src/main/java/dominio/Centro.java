@@ -20,7 +20,6 @@ public class Centro implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
 	private String endereco;
@@ -34,4 +33,10 @@ public class Centro implements Serializable {
 		this.endereco = endereco;
 	}
 	
+    @Override
+    public String toString() {
+        return "Centro " + nome +
+                " | " + endereco +
+                " | ID: " + id;
+    }
 }

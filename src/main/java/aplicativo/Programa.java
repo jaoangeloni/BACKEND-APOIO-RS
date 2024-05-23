@@ -1,14 +1,17 @@
 package aplicativo;
 
-import DAO.CentroDAO;
-import dominio.Centro;
+import apresentacao.MenuPrincipal;
+import config.CentrosInstantiation;
 
 public class Programa {
 	public static void main(String[] args) {
-		Centro centroTeste = new Centro(null, "teste", "teste");
-		CentroDAO centroDAO = new CentroDAO();
 		
-		centroDAO.inserir(centroTeste);
+		CentrosInstantiation centroInstantiation = new CentrosInstantiation();
+		centroInstantiation.instanciar();
+		
+		MenuPrincipal menuPrincipal = new MenuPrincipal();
+		menuPrincipal.menuFuncional();
+		
 		
 	}
 }

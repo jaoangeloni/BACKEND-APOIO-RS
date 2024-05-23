@@ -1,4 +1,4 @@
-package dominio;
+/* package dominio;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -21,9 +21,6 @@ public class Pedido implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String id;
 	
-	private Centro centro;
-	
-	private Abrigo abrigo;
 	
 	@ManyToOne
 	@JoinColumn(name = "itemId")
@@ -39,10 +36,8 @@ public class Pedido implements Serializable{
 	
 	public Pedido() {}
 
-	public Pedido(String id, Centro centro, Abrigo abrigo, Item item, Integer quantidade, Date data, String status,String motivo) {
+	public Pedido(String id, Item item, Integer quantidade, Date data, String status,String motivo) {
 		this.id = id;
-		this.centro = centro;
-		this.abrigo = abrigo;
 		this.item = item;
 		this.quantidade = quantidade;
 		this.data = data;
@@ -50,3 +45,4 @@ public class Pedido implements Serializable{
 		this.motivo = motivo;
 	}
 }
+*/
