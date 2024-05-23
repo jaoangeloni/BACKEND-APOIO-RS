@@ -26,13 +26,8 @@ public class Abrigo implements Serializable{
 	private String telefone;
 	
 	
-	
-	
 	public Abrigo() {
 	}
-
-	
-
 	
 	public Abrigo(Integer id, String nome, String endereco, String email, Integer capacidade, String ocupacao, String responsavel,
 			String telefone) {
@@ -141,10 +136,4 @@ public class Abrigo implements Serializable{
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-	
-
-		
-
-	
-	
 }

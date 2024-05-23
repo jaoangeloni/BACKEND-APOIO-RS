@@ -1,5 +1,6 @@
 package aplicativo;
 
+
 import dominio.Abrigo;
 import dominio.CentroDeDistribuicao;
 
@@ -9,17 +10,13 @@ import DAO.AbrigoDAO;
 
 public class Programa {
 	public static void main(String[] args) {
+
+		CentrosInstantiation centroInstantiation = new CentrosInstantiation();
+		centroInstantiation.instanciar();
 		
-		CentroDeDistribuicao centros = new CentroDeDistribuicao();
-		centros.inserirCentros();
+		MenuPrincipal menuPrincipal = new MenuPrincipal();
+		menuPrincipal.menuFuncional();
 		
-		
-		Abrigo abrigo1 = new Abrigo(null, "Abrigo1", "Rua das ruas", "abrigo@gmail.com", 300, "75%", "Seu Joao",
-				"13997979797");
-		
-		AbrigoDAO crud = new AbrigoDAO();
-		
-		crud.apagarTodos();
 		
 	}
 }

@@ -1,10 +1,13 @@
-/*package aplicativo;
+package aplicativo;
+
 
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+
+import org.hibernate.cache.spi.support.AbstractReadWriteAccess.Item;
 
 public class ItemDAO {
     // Cria uma instância do EntityManagerFactory usando a unidade de persistência "aplicativoPU"
@@ -45,14 +48,14 @@ public class ItemDAO {
             item.setCategoria(itemDetails.getCategoria());
             item.setQuantidade(itemDetails.getQuantidade());
             item.setTamanho(itemDetails.getTamanho());
-            item.setNumeroCalcado(itemDetails.getNumeroCalcado());
             em.getTransaction().commit(); // Confirma a transação
         } else {
             em.getTransaction().rollback(); // Desfaz a transação se o item não for encontrado
         }
         em.close(); // Fecha o EntityManager
     }
-
+	
+    
     // Método para deletar um item
     public void deleteItem(Long id) {
         EntityManager em = emf.createEntityManager(); // Cria uma nova instância de EntityManager
@@ -66,4 +69,4 @@ public class ItemDAO {
         }
         em.close(); // Fecha o EntityManager
     }
-}*/
+}
