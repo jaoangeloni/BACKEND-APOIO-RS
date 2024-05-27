@@ -3,15 +3,23 @@ package apresentacao;
 import java.util.Scanner;
 
 import Controller.CentroController;
+import Controller.EstoqueCentroController;
 import DAO.CentroDAO;
+import dominio.Centro;
 import enums.OpcoesMenuCentro;
 
 public class MenuCentro {
 	CentroController centroController = new CentroController();
+	Centro centro = new Centro();
 	
-	public OpcoesMenuCentro menu() {
+	public void receberCentro(Centro centro) {
+		this.centro = centro;
+	}
+	
+	public OpcoesMenuCentro menu(Centro centro) {
 		Scanner sc = new Scanner(System.in);
 		
+		System.out.println(centro);
 		System.out.println("1. Listar estoque");
     	System.out.println("2. Listar pedidos");
     	System.out.println("3. Aprovar/Rescusar pedido");
@@ -32,15 +40,13 @@ public class MenuCentro {
     	return OpcoesMenuCentro.OP_NAO_SELECIONADA;
 	}
 	
-	public void menuFuncional() {
-
-		CentroDAO centroDAO = new CentroDAO();		
+	public void menuFuncional(Centro centro) {
 		Scanner sc = new Scanner(System.in);
 
 		OpcoesMenuCentro opcao = OpcoesMenuCentro.OP_NAO_SELECIONADA;
 		
 		while (opcao != OpcoesMenuCentro.OP_SAIR) {
-			opcao = menu();
+			opcao = menu(centro);
 			
 			switch (opcao) {
 			case OP_LISTAR_ESTOQUE:

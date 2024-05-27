@@ -6,10 +6,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import org.hibernate.HibernateException;
 
+import dominio.Centro;
 import dominio.EstoqueCentros;
 import dto.EstoqueCentroDTO;
 
@@ -33,23 +35,20 @@ public class EstoqueCentroDAO {
 	}
 
 	//listar todos
-	public List<EstoqueCentroDTO> listarTodos() {
-	    EntityManager em = emf.createEntityManager();
-	    List<EstoqueCentroDTO> estoque = null;
-	    try {
-	        String jpql = "SELECT new dto.EstoqueCentroDTO(ec.id, ec.item, SUM(ec.quantidade), ec.limite) "
-	                    + "FROM EstoqueCentros ec "
-	                    + "GROUP BY ec.id, ec.item, ec.limite";
-	        TypedQuery<EstoqueCentroDTO> query = em.createQuery(jpql, EstoqueCentroDTO.class);
-	        estoque = query.getResultList();
-	    } catch (HibernateException e) {
-	        e.printStackTrace();
-	    } finally {
-	        em.close();
-	    }
-	    return estoque;
-	}
-	
+    public List<EstoqueCentros> listarTodos() {
+        EntityManager em = emf.createEntityManager();
+        List<EstoqueCentros> centros = null;
+        try {
+            Query query = em.createQuery("SELECT ec FROM EstoqueCentros ec");
+            centros = query.getResultList();
+        } catch (HibernateException e) {
+            e.printStackTrace();
+        } finally {
+            em.close();
+        }
+        return centros;
+    }
+    
 	// excluir
 	public void excluirPorId(Integer id) {
 		EntityManager em = emf.createEntityManager();

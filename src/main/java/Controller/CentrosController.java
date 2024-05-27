@@ -23,6 +23,7 @@ public class CentrosController {
 	public void opcaoSelecionar(Integer id){
 		Centro centro = new Centro();
 		centro = centroDAO.listarPorId(id);
-		menuCentro.menu();
+		menuCentro.receberCentro(centro);
+		menuCentro.menuFuncional(centro);
 	}
 }

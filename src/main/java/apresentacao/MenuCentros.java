@@ -3,8 +3,9 @@ package apresentacao;
 import java.util.Scanner;
 
 import Controller.CentrosController;
+import Controller.EstoqueCentroController;
 import DAO.CentroDAO;
-import dominio.Centro;
+import DAO.EstoqueCentroDAO;
 import enums.OpcoesMenuCentros;
 
 public class MenuCentros {
@@ -33,9 +34,6 @@ public class MenuCentros {
 	}
 	
 	public void menuFuncional() {
-
-		CentroDAO centroDAO = new CentroDAO();
-		
 		Scanner sc = new Scanner(System.in);
 
 		OpcoesMenuCentros opcao = OpcoesMenuCentros.OP_NAO_SELECIONADA;
@@ -45,9 +43,7 @@ public class MenuCentros {
 			
 			switch (opcao) {
 			case OP_LISTAR_CENTROS:
-				
 				centrosController.opcaoListar();
-				
 				break;
 			case OP_SELECIONAR_CENTRO:
 				
