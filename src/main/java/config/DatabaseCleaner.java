@@ -1,4 +1,4 @@
-package database;
+package config;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
