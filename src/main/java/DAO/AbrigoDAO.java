@@ -8,19 +8,25 @@ import javax.persistence.Persistence;
 
 import org.hibernate.HibernateException;
 
+import Controller.AbrigoController;
+
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 
 import dominio.Abrigo;
+import dominio.EstoqueAbrigos;
 
 
 public class AbrigoDAO {
 
 
 	
-
+	
 	
 	
 	private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("sos_rs");
@@ -28,18 +34,24 @@ public class AbrigoDAO {
 	
 	public void inserirAbrigo(Abrigo obj) {
 		
-		EntityManager em = emf.createEntityManager();
-        EntityTransaction transaction = em.getTransaction();
+		try {
+	        AbrigoController.validar(obj); // Valida os dados do Abrigo antes de inserir
 
-        try {
-            transaction.begin();
-            em.persist(obj);
-            transaction.commit();
-        } catch (HibernateException e) {
-            e.printStackTrace();
-        } finally {
-            em.close();
-        }
+	        EntityManager em = emf.createEntityManager();
+	        EntityTransaction transaction = em.getTransaction();
+
+	        try {
+	            transaction.begin();
+	            em.persist(obj);
+	            transaction.commit();
+	        } catch (HibernateException e) {
+	            e.printStackTrace();
+	        } finally {
+	            em.close();
+	        }
+	    } catch (IllegalArgumentException e) {
+	        System.out.println("Erro na validação: " + e.getMessage());
+	    }
 	}
 	
 	
@@ -159,21 +171,68 @@ public class AbrigoDAO {
 	    return abrigosList;
 	}
 
+	public void buscarAbrigoComEstoque(Integer id) {
+	    EntityManager em = emf.createEntityManager();
+	    Abrigo abrigo = null;
+	    try {
+	        abrigo = em.find(Abrigo.class, id);
+	        if (abrigo != null) {
+	            System.out.println("Abrigo: " + abrigo.getNome());
+	            for (EstoqueAbrigos estoque : abrigo.getEstoqueAbrigos()) {
+	                System.out.println("Item: " + estoque.getItem().getNome() + ", Quantidade: " + estoque.getQuantidade());
+	            }
+	        } else {
+	            System.out.println("Abrigo não encontrado.");
+	        }
+	    } finally {
+	        em.close();
+	    }
+	}
+	
+
+
+	    public List<Abrigo> consultarAbrigos(Integer capacidade, String ocupacao, Integer quantidadeMinima) {
+	        EntityManager em = emf.createEntityManager();
+	        try {
+	            StringBuilder jpql = new StringBuilder("SELECT a FROM Abrigo a JOIN a.estoqueAbrigo e WHERE 1=1");
+
+	            if (capacidade != null) {
+	                jpql.append(" AND a.capacidade >= :capacidade");
+	            }
+
+	            if (ocupacao != null && !ocupacao.isEmpty()) {
+	                jpql.append(" AND a.ocupacao = :ocupacao");
+	            }
+
+	            if (quantidadeMinima != null) {
+	                jpql.append(" AND e.quantidade >= :quantidadeMinima");
+	            }
+
+	            TypedQuery<Abrigo> query = em.createQuery(jpql.toString(), Abrigo.class);
+
+	            if (capacidade != null) {
+	                query.setParameter("capacidade", capacidade);
+	            }
+
+	            if (ocupacao != null && !ocupacao.isEmpty()) {
+	                query.setParameter("ocupacao", ocupacao);
+	            }
+
+	            if (quantidadeMinima != null) {
+	                query.setParameter("quantidadeMinima", quantidadeMinima);
+	            }
+
+	            return query.getResultList();
+	        } finally {
+	            em.close();
+	        }
+	    }
+	}
+	
+	
 	
 
 	
-
-	
 	
 
 	
-	
-
-	
-
-	
-
-
-	
-
-}

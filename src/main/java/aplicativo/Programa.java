@@ -14,15 +14,12 @@ public class Programa {
 		centros.inserirCentros();
 		
 		
-		Abrigo abrigo1 = new Abrigo(null, "Abrigo1", "Rua das ruas", "abrigo@gmail.com", 300, "75%", "Seu Joao",
-				"13997979797");
+		Abrigo abrigo1 = new Abrigo(null, "Abrigo1", "Rua das ruas", "abrigo@gmail.com", 300, "75%", "Seu Joao","13997973955");
 		
 		AbrigoDAO crud = new AbrigoDAO();
 		
-		crud.apagarTodos();
+		crud.inserirAbrigo(abrigo1);;
 		
 	}
 }
 		
-
-       

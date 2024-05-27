@@ -1,11 +1,16 @@
 package dominio;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -25,17 +30,18 @@ public class Abrigo implements Serializable{
 	private String responsavel;
 	private String telefone;
 	
-	
-	
+	@OneToMany(mappedBy = "abrigo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<EstoqueAbrigos> estoqueAbrigos;
 	
 	public Abrigo() {
 	}
-
 	
 
-	
-	public Abrigo(Integer id, String nome, String endereco, String email, Integer capacidade, String ocupacao, String responsavel,
-			String telefone) {
+		
+	public Abrigo(Integer id, String nome, String endereco, String email, Integer capacidade, String ocupacao,
+			String responsavel, String telefone
+			/*List<EstoqueAbrigos> estoqueAbrigos*/
+		) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -45,9 +51,11 @@ public class Abrigo implements Serializable{
 		this.ocupacao = ocupacao;
 		this.responsavel = responsavel;
 		this.telefone = telefone;
+		//this.estoqueAbrigos = estoqueAbrigos;
 	}
 
-		
+
+
 	public int getId() {
 		return id;
 	}
@@ -57,7 +65,14 @@ public class Abrigo implements Serializable{
 	public void setId(int id) {
 		this.id = id;
 	}
+	
+	public Set<EstoqueAbrigos> getEstoqueAbrigos() {
+        return estoqueAbrigos;
+    }
 
+    public void setEstoqueAbrigos(Set<EstoqueAbrigos> estoqueAbrigos) {
+        this.estoqueAbrigos = estoqueAbrigos;
+    }
 
 
 	public String getNome() {
@@ -141,10 +156,4 @@ public class Abrigo implements Serializable{
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-	
-
-		
-
-	
-	
 }
