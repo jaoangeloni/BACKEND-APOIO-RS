@@ -33,8 +33,32 @@ public class PedidoDAO {
         try {
             em.getTransaction().begin();
             List<EstoqueCentros> estoquesCentro = listarCentrosDisponiveis(item);
-            // Lógica para criar o pedido
-            em.getTransaction().commit();
+
+            int quantidadeRestante = quantidade;
+            for (EstoqueCentros estoqueCentros : estoquesCentro) {
+                if (quantidadeRestante <= 0) break;
+
+                int quantidadePedida = Math.min(quantidadeRestante, estoqueCentros.getQuantidade());
+                Pedido pedido = new Pedido();
+                pedido.setAbrigo(em.find(Abrigo.class, abrigoId));
+                pedido.setItem(item);
+                pedido.setQuantidade(quantidadePedida);
+                pedido.setCentro(estoqueCentros.getCentro());
+
+                estoqueCentros.setQuantidade(estoqueCentros.getQuantidade() - quantidadePedida);
+                em.persist(pedido);
+                em.merge(estoqueCentros);
+
+                quantidadeRestante -= quantidadePedida;
+            }
+
+            if (quantidadeRestante > 0) {
+                em.getTransaction().rollback();
+                em.close();
+                return "Não há quantidade suficiente do item nos centros de distribuição.";
+            } else {
+                em.getTransaction().commit();
+            }
             return "Pedido realizado com sucesso!";
         } catch (HibernateException e) {
             if (em.getTransaction().isActive()) {
@@ -50,7 +74,30 @@ public class PedidoDAO {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
-            // Lógica para atualizar o status do pedido
+
+            Pedido pedido = em.find(Pedido.class, pedidoId);
+            if (pedido == null) {
+                em.getTransaction().rollback();
+                em.close();
+                return "Pedido não encontrado.";
+            }
+
+            pedido.setStatus(novoStatus);
+            if (novoStatus == StatusPedido.ACEITO) {
+                EstoqueCentros estoqueCentros = em.createQuery(
+                                "SELECT ec FROM EstoqueCentros ec WHERE ec.centro = :centro AND ec.item = :item",
+                                EstoqueCentros.class
+                        )
+                        .setParameter("centro", pedido.getCentro())
+                        .setParameter("item", pedido.getItem())
+                        .getSingleResult();
+                estoqueCentros.setQuantidade((estoqueCentros.getQuantidade()) - pedido.getQuantidade());
+                em.merge(estoqueCentros);
+            }
+
+            em.merge(pedido);
+            em.getTransaction().commit();
+
             em.getTransaction().commit();
             return "Status do pedido atualizado com sucesso!";
         } catch (HibernateException e) {
@@ -90,7 +137,27 @@ public class PedidoDAO {
             em.merge(pedido);
 
             // Atualizar estoques
-            // Lógica para atualizar estoques
+            EstoqueCentros estoqueCentro = em.createQuery(
+                            "SELECT ec FROM EstoqueCentros ec WHERE ec.centro = :centro AND ec.item = :item",
+                            EstoqueCentros.class
+                    )
+                    .setParameter("centro", pedido.getCentro())
+                    .setParameter("item", pedido.getItem())
+                    .getSingleResult();
+
+            EstoqueAbrigos estoqueAbrigo = em.createQuery(
+                            "SELECT ea FROM EstoqueAbrigos ea WHERE ea.abrigo = :abrigo AND ea.item = :item",
+                            EstoqueAbrigos.class
+                    )
+                    .setParameter("abrigo", pedido.getAbrigo())
+                    .setParameter("item", pedido.getItem())
+                    .getSingleResult();
+
+            estoqueCentro.setQuantidade(estoqueCentro.getQuantidade() - pedido.getQuantidade());
+            estoqueAbrigo.setQuantidade(estoqueAbrigo.getQuantidade() + pedido.getQuantidade());
+
+            em.merge(estoqueCentro);
+            em.merge(estoqueAbrigo);
 
             em.getTransaction().commit();
             return "Pedido aceito e estoque atualizado com sucesso.";
