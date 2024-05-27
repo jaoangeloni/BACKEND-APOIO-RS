@@ -93,12 +93,22 @@ public class PedidoDAO {
                         .getSingleResult();
                 estoqueCentros.setQuantidade((estoqueCentros.getQuantidade()) - pedido.getQuantidade());
                 em.merge(estoqueCentros);
+                EstoqueAbrigos estoqueAbrigos = em.createQuery(
+                                "SELECT ec FROM EstoqueAbrigos ec WHERE ec.abrigo = :abrigo AND ec.item = :item",
+                                EstoqueAbrigos.class
+                        )
+                        .setParameter("abrigo", pedido.getAbrigo())
+                        .setParameter("item", pedido.getItem())
+                        .getSingleResult();
+                estoqueAbrigos.setQuantidade((estoqueAbrigos.getQuantidade()) + pedido.getQuantidade());
+                em.merge(estoqueAbrigos);
+                return "Pedido aceito com sucesso e quantidades atualizadas!";
+            } else if (novoStatus == StatusPedido.REJEITADO) {
+                return "Pedido rejeitado pelo centro";
             }
-
             em.merge(pedido);
             em.getTransaction().commit();
 
-            em.getTransaction().commit();
             return "Status do pedido atualizado com sucesso!";
         } catch (HibernateException e) {
             if (em.getTransaction().isActive()) {
@@ -124,52 +134,4 @@ public class PedidoDAO {
             em.close();
         }
     }
-
-    public String aceitarPedido(Long pedidoId) {
-        EntityManager em = emf.createEntityManager();
-        try {
-            em.getTransaction().begin();
-            Pedido pedido = em.find(Pedido.class, pedidoId);
-            if (pedido == null) {
-                return "Pedido não encontrado.";
-            }
-            pedido.setStatus(StatusPedido.ACEITO);
-            em.merge(pedido);
-
-            // Atualizar estoques
-            EstoqueCentros estoqueCentro = em.createQuery(
-                            "SELECT ec FROM EstoqueCentros ec WHERE ec.centro = :centro AND ec.item = :item",
-                            EstoqueCentros.class
-                    )
-                    .setParameter("centro", pedido.getCentro())
-                    .setParameter("item", pedido.getItem())
-                    .getSingleResult();
-
-            EstoqueAbrigos estoqueAbrigo = em.createQuery(
-                            "SELECT ea FROM EstoqueAbrigos ea WHERE ea.abrigo = :abrigo AND ea.item = :item",
-                            EstoqueAbrigos.class
-                    )
-                    .setParameter("abrigo", pedido.getAbrigo())
-                    .setParameter("item", pedido.getItem())
-                    .getSingleResult();
-
-            estoqueCentro.setQuantidade(estoqueCentro.getQuantidade() - pedido.getQuantidade());
-            estoqueAbrigo.setQuantidade(estoqueAbrigo.getQuantidade() + pedido.getQuantidade());
-
-            em.merge(estoqueCentro);
-            em.merge(estoqueAbrigo);
-
-            em.getTransaction().commit();
-            return "Pedido aceito e estoque atualizado com sucesso.";
-        } catch (HibernateException e) {
-            if (em.getTransaction().isActive()) {
-                em.getTransaction().rollback();
-            }
-            return "Erro ao aceitar pedido: " + e.getMessage();
-        } finally {
-            em.close();
-        }
-    }
 }
-
-
