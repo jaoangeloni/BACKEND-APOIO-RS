@@ -45,10 +45,6 @@ public class PedidoDAO {
                 pedido.setQuantidade(quantidadePedida);
                 pedido.setCentro(estoqueCentros.getCentro());
 
-                estoqueCentros.setQuantidade(estoqueCentros.getQuantidade() - quantidadePedida);
-                em.persist(pedido);
-                em.merge(estoqueCentros);
-
                 quantidadeRestante -= quantidadePedida;
             }
 
