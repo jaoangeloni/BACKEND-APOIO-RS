@@ -37,7 +37,7 @@ public class CentroDeDistribuicao implements Serializable {
 	        CentroDeDistribuicao c2 = new CentroDeDistribuicao(null, "Prosperidade.", "Av. Borges de Medeiros 1501 Porto Alegre CEP: 90119900");
 	        CentroDeDistribuicao c3 = new CentroDeDistribuicao(null, "Reconstrução.", "R. Dr. Décio Martins Costa, 312 - Vila Eunice Nova, Cachoeirinha - RS, 94920-170");
 
-	        EntityManagerFactory emf = Persistence.createEntityManagerFactory("sos-rs");
+	        EntityManagerFactory emf = Persistence.createEntityManagerFactory("sos_rs");
 	        EntityManager em = emf.createEntityManager();
 	        EntityTransaction transaction = em.getTransaction();
 
