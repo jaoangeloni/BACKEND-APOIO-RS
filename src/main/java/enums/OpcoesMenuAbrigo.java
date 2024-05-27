@@ -1,0 +1,10 @@
+package enums;
+
+public enum OpcoesMenuAbrigo {
+    OP_NAO_SELECIONADA,
+    OP_LISTAR_ITENS_ESTOQUE,
+    OP_REALIZAR_PEDIDO,
+    OP_TRANSFERIR_ITENS,
+    OP_VERIFICAR_ALERTAS,
+    OP_SAIR;
+}

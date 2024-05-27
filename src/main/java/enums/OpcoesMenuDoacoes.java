@@ -1,0 +1,11 @@
+package enums;
+
+public enum OpcoesMenuDoacoes {
+	OP_NAO_SELECIONADA,
+	OP_LISTAR_ITENS,
+	OP_LISTAR_DOACOES,
+	OP_DOAR_ITEM,
+	OP_ALTERAR_DOACAO,
+	OP_DELETAR_DOACAO,
+	OP_SAIR;
+}
