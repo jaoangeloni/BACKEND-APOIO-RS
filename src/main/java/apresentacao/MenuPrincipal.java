@@ -37,6 +37,7 @@ public class MenuPrincipal {
 	
 	public void menuFuncional() {
 		MenuCentros menuCentros = new MenuCentros();
+		MenuDoacoes menuDoacoes = new MenuDoacoes();
 		
 		OpcoesMenuPrincipal opcao = OpcoesMenuPrincipal.OP_NAO_SELECIONADA;
 
@@ -48,10 +49,10 @@ public class MenuPrincipal {
 				menuCentros.menuFuncional();
 				break;
 			case OP_ABRIGO:
-				System.out.println("Abrigos");
+
 				break;
 			case OP_DOACAO:
-				System.out.println("Doações");
+				menuDoacoes.menuFuncional();
 				break;
 			case OP_SAIR:
 				System.out.println("Saindo do programa...");

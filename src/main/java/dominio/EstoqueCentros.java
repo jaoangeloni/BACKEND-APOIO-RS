@@ -25,11 +25,57 @@ public class EstoqueCentros implements Serializable {
 
     public EstoqueCentros() {}
 
-    public EstoqueCentros(Integer id, Centro centro, Item item, Integer quantidade, Integer limite) {
+    public EstoqueCentros(Integer id, Centro centro, Item item, Integer quantidade) {
         this.id = id;
         this.centro = centro;
         this.item = item;
         this.quantidade = quantidade;
     }
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Centro getCentro() {
+		return centro;
+	}
+
+	public void setCentro(Centro centro) {
+		this.centro = centro;
+	}
+
+	public Item getItem() {
+		return item;
+	}
+
+	public void setItem(Item item) {
+		this.item = item;
+	}
+
+	public Integer getQuantidade() {
+		return quantidade;
+	}
+
+	public void setQuantidade(Integer quantidade) {
+		this.quantidade = quantidade;
+	}
+
+	public Integer getLimite() {
+		return limite;
+	}
+
+	public void setLimite(Integer limite) {
+		this.limite = limite;
+	}
+
+	@Override
+	public String toString() {
+		return "[id: " + id + "] [centro=" + centro.getNome() + "] [item: " + item.getNome() + "] [quantidade: " + quantidade
+				+ "] [limite=" + limite + "]";
+	}
 
 }

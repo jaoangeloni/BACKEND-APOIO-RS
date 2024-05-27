@@ -17,11 +17,6 @@ import dominio.Abrigo;
 
 
 public class AbrigoDAO {
-
-
-	
-
-	
 	
 	private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("sos_rs");
 

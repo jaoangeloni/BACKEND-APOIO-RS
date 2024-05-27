@@ -15,7 +15,7 @@ public class MenuCentros {
 
 		System.out.println("CENTROS DE DISTRIBUIÇÃO");
 		System.out.println("1. Listar centros disponíveis");
-		System.out.println("2. Assumir centro");
+		System.out.println("2. Selecionar centro");
 		System.out.println("3. Voltar para o menu principal");
 
 		int op = sc.nextInt();
@@ -24,7 +24,7 @@ public class MenuCentros {
 		case 1:
 			return OpcoesMenuCentros.OP_LISTAR_CENTROS;
 		case 2:
-			return OpcoesMenuCentros.OP_ASSUMIR_CENTRO;
+			return OpcoesMenuCentros.OP_SELECIONAR_CENTRO;
 		case 3:
 			return OpcoesMenuCentros.OP_SAIR;
 		}
@@ -49,11 +49,11 @@ public class MenuCentros {
 				centrosController.opcaoListar();
 				
 				break;
-			case OP_ASSUMIR_CENTRO:
+			case OP_SELECIONAR_CENTRO:
 				
 				System.out.println("Digite o id do centro: ");
 				Integer id = sc.nextInt();
-				centrosController.opcaoAssumir(id);
+				centrosController.opcaoSelecionar(id);
 				
 				break;
 			case OP_SAIR:
