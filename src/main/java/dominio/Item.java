@@ -4,45 +4,45 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 import enums.Categoria;
 
 @Entity
-@Table(name = "item")
 public class Item {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+	private Categoria categoria;
+	private String nome;
+	private String genero;
+	private String tamanho;
+	private int quantidade;
 
-    private String nome;
-    private Categoria categoria;
-    private Integer quantidade;
-    private String descricao;
 
-    public Item() {}
+	public Item(int id, Categoria categoria, String nome, String genero, String tamanho, int quantidade) {
+		this.id = id;
+		this.categoria = categoria;
+		this.nome = nome;
+		this.genero = genero;
+		this.tamanho = tamanho;
+		this.quantidade = quantidade;
+	}
 
-    public Item(String nome, Categoria categoria, Integer quantidade, String descricao) {
-        this.nome = nome;
-        this.categoria = categoria;
-        this.quantidade = quantidade;
-        this.descricao = descricao;
-    }
 
-	public Integer getId() {
+	public Item(Categoria categoria, String nome, String genero, String tamanho, int quantidade) {
+		this.categoria = categoria;
+		this.nome = nome;
+		this.genero = genero;
+		this.tamanho = tamanho;
+		this.quantidade = quantidade;
+	}
+
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
 	}
 
 	public Categoria getCategoria() {
@@ -53,20 +53,35 @@ public class Item {
 		this.categoria = categoria;
 	}
 
-	public Integer getQuantidade() {
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getGenero() {
+		return genero;
+	}
+
+	public void setGenero(String genero) {
+		this.genero = genero;
+	}
+
+	public String getTamanho() {
+		return tamanho;
+	}
+
+	public void setTamanho(String tamanho) {
+		this.tamanho = tamanho;
+	}
+
+	public int getQuantidade() {
 		return quantidade;
 	}
 
-	public void setQuantidade(Integer quantidade) {
+	public void setQuantidade(int quantidade) {
 		this.quantidade = quantidade;
 	}
-
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-    
 }

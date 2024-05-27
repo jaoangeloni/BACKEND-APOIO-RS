@@ -20,6 +20,6 @@ public class CentrosController {
 	public void opcaoAssumir(Integer id){
 		Centro centro = new Centro();
 		centro = centroDAO.listarPorId(id);
-		menuCentro.menu(centro);
+		menuCentro.menu();
 	}
 }

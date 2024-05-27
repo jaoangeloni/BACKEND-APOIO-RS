@@ -1,4 +1,4 @@
-/*package dominio;
+package dominio;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -32,5 +32,35 @@ public class EstoqueCentros implements Serializable {
         this.quantidade = quantidade;
     }
 
+    public Centro getCentro() {
+        return centro;
+    }
+
+    public void setCentro(Centro centro) {
+        this.centro = centro;
+    }
+
+    public Item getItem() {
+        return item;
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
+    }
+
+    public Integer getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(Integer quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    public Integer getLimite() {
+        return limite;
+    }
+
+    public void setLimite(Integer limite) {
+        this.limite = limite;
+    }
 }
-*/
